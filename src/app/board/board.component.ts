@@ -14,7 +14,7 @@ export class BoardComponent implements OnInit {
     this.apiService.getBoards().subscribe(
       (result: Board[]) => {
         this.boards = result;
-        console.log(result);
+        // console.log(result);
       },
       error => {
         console.log(error)

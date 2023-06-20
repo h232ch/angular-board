@@ -7,6 +7,10 @@ import {BoardModule} from "./board/board.module";
 import {AuthModule} from "./auth/auth.module";
 
 
+// HttpClient
+import {HttpClientModule} from "@angular/common/http";
+
+
 // Routing setup
 
 @NgModule({
@@ -18,6 +22,7 @@ import {AuthModule} from "./auth/auth.module";
     AppRoutingModule,
     BoardModule,
     AuthModule,
+    HttpClientModule,
   ],
   exports: [
   ],

@@ -1,0 +1,24 @@
+<div *ngIf="board && !editSw" class="container">
+  <div class="row">
+    <div class="border-bottom col-12 mb-2 mt-5">
+      <h2>{{ board.title }}</h2>
+    </div>
+    <div class="col-12 mb-3">
+      <a class="name_and_date">Nickname 2023-6-37 11:00:32</a>
+    </div>
+    <div class="col-12 mt-3">
+      <a>{{ board.description }}</a>
+    </div>
+    <div class="row justify-content-end mt-5">
+      <button type="button" class="btn btn-dark col-1" (click)="goBack()">Back</button>
+      <button type="button" class="btn btn-dark ms-2 col-1" (click)="editSwitch(true)">Edit</button>
+      <button type="button" class="btn btn-dark ms-2 col-1" (click)="boardDeleted(board)">Delete</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="board && editSw">
+  <app-board-form [board]="board"
+                  (switch)="editSwitch($event)"
+                  (boardUpdated)="boardUpdated($event)"
+  ></app-board-form>
+</div>

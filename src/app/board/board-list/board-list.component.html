@@ -1,0 +1,36 @@
+<div *ngIf="boards && writeSw==false" class="container mx-auto my-5">
+  <div class="row">
+    <table class="table table-hover mx-auto">
+      <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">score</th>
+        <th scope="col">score_avg</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let board of boards">
+        <th scope="row">{{ board.id }}</th>
+        <td>
+          <a routerLink="/board/{{board.id}}">
+            {{ board.title }}
+          </a>
+        </td>
+        <td>{{ board.no_of_ratings }}</td>
+        <td>{{ board.avg_ratings }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-end mt-4">
+    <button type="button" class="btn btn-dark col-1" (click)="writeSwitch(true)">Write</button>
+  </div>
+</div>
+<div>
+  <app-board-form *ngIf="writeSw" [board]="writableBoard"
+                  (switch)="writeSwitch(false)"
+                  (boardCreated)="boardCreated($event)">
+  </app-board-form>
+</div>
+

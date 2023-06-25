@@ -13,6 +13,7 @@
   <symbol id="chevron-right" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
   </symbol>
+
 </svg>
 
 
@@ -54,7 +55,6 @@
 <!-- nav bar -->
 <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
   <div class="container">
-
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="#offcanvas" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -72,8 +72,9 @@
               </svg>
             </a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="/board">BOARD</a></li>
-          <li class="nav-item"><a class="nav-link" href="/auth">LOGIN</a></li>
+<!--          RouterLink added -->
+          <li class="nav-item"><a class="nav-link" routerLink="/board">BOARD</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/auth">LOGIN</a></li>
           <li class="nav-item"><a class="nav-link" href="#">
             <svg class="bi" width="24" height="24"><use xlink:href="#person"/></svg>
           </a></li>
@@ -83,7 +84,6 @@
   </div>
 </nav>
 
-<main style=""></main>
 <router-outlet></router-outlet>
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,19 @@
+<div class="container mx-auto my-5">
+  <div class="row">
+    <form [formGroup]="boardForm" (ngSubmit)="saveForm()">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title">
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Description</label>
+        <textarea class="form-control" id="desc" rows="3" formControlName="description"></textarea>
+      </div>
+      <div class="row justify-content-end mt-4">
+        <button type="submit" class="btn btn-dark col-1" (click)="goBack()">Back</button>
+        <button *ngIf="id" type="submit" class="btn btn-dark ms-2 col-1">Edit</button>
+        <button *ngIf="!id" type="submit" class="btn btn-dark ms-2 col-1">Write</button>
+      </div>
+    </form>
+  </div>
+</div>

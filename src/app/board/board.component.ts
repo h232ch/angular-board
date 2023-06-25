@@ -9,7 +9,7 @@ import {Board} from "../models/Board";
 })
 export class BoardComponent implements OnInit {
 
-  boards: Board[] | undefined;
+  boards?: Board[]
   ngOnInit(): void {
     this.apiService.getBoards().subscribe(
       (result: Board[]) => {

@@ -1,30 +1,42 @@
 import {Component, OnInit} from '@angular/core';
 import {Board} from "../../models/Board";
+import {Boards} from "../../models/Boards";
 import {ApiService} from "../../api.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {PageEvent} from "@angular/material/paginator";
+import {BehaviorSubject, Observable} from "rxjs";
 
 
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.css']
+  styleUrls: ['./board-list.component.css'],
 })
 export class BoardListComponent implements OnInit {
 
   constructor(private apiService: ApiService ) {
+
   }
 
-  boards?: Board[]
-  writeSw?: Boolean;
+  boards!:any;
+  dataSource!:MatTableDataSource<any>;
+
+  writeSw!: Boolean;
   writableBoard = {
     title: '',
     description: '',
   }
 
+  length!:number;
+  pageSize!:number;
+
   ngOnInit(): void {
     this.apiService.getBoards().subscribe(
-      (result: Board[]) => {
+      (result: Boards) => {
         this.boards = result;
-        // console.log(result);
+        this.length = this.boards.count;
+        this.pageSize = this.boards.results.length;
+        this.dataSource = new MatTableDataSource(this.boards.results);
       },
       error => {
         console.log(error)
@@ -38,7 +50,19 @@ export class BoardListComponent implements OnInit {
   }
 
   boardCreated(board: Board) {
-    this.boards?.push(board);
-    this.writeSwitch(false);
+    // TODO: change to sorting function
+    // this.boards.results.push(board);
+    // this.writeSwitch(false);
+    window.location.reload();
+  }
+
+  changePage(event: PageEvent) {
+    // console.log(event)
+    this.apiService.getBoardsPage(event.pageIndex+1).subscribe(
+      (result: Boards) => {
+        this.dataSource = new MatTableDataSource(result.results);;
+        console.log(result);
+      }
+    )
   }
 }

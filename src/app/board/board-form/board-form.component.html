@@ -10,9 +10,9 @@
         <textarea class="form-control" id="desc" rows="3" formControlName="description"></textarea>
       </div>
       <div class="row justify-content-end mt-4">
-        <button type="submit" class="btn btn-dark col-1" (click)="goBack()">Back</button>
-        <button *ngIf="id" type="submit" class="btn btn-dark ms-2 col-1">Edit</button>
-        <button *ngIf="!id" type="submit" class="btn btn-dark ms-2 col-1">Write</button>
+        <button type="submit" class="btn btn-dark my-2 btn-sm col-md-1" (click)="goBack()">Back</button>
+        <button *ngIf="id" type="submit" class="btn btn-dark btn-sm my-2 ms-2 col-md-1">Edit</button>
+        <button *ngIf="!id" type="submit" class="btn btn-dark btn-sm my-2 ms-2 col-md-1">Write</button>
       </div>
     </form>
   </div>

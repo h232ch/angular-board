@@ -1,0 +1,16 @@
+<div class="container mx-auto my-5">
+  <div class="row">
+    <form [formGroup]="commentForm" (ngSubmit)="saveForm()">
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea rows="3" class="form-control" id="comment" formControlName="comment"></textarea>
+      </div>
+      <div class="row justify-content-end mt-4">
+        <button type="submit" class="btn btn-dark my-2 btn-sm col-md-1" (click)="goBack()">Back</button>
+        <button *ngIf="commentId" type="submit" class="btn btn-dark btn-sm my-2 ms-2 col-md-1">Edit</button>
+        <button *ngIf="!commentId" type="submit" class="btn btn-dark btn-sm my-2 ms-2 col-md-1">Write</button>
+      </div>
+    </form>
+  </div>
+</div>
+

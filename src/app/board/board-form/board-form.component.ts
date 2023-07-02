@@ -14,13 +14,14 @@ export class BoardFormComponent {
   constructor(private apiService: ApiService,
               private location: Location) {
   }
-
   boardForm: any;
   id?: number;
+  pubDate!:Date;
 
   @Output() switch = new EventEmitter<any>;
   @Output() boardCreated = new EventEmitter<any>();
   @Output() boardUpdated = new EventEmitter<any>();
+
   @Input() set board(val: any) {
     this.id = val.id;
     this.boardForm = new FormGroup({
@@ -40,9 +41,11 @@ export class BoardFormComponent {
         }
       )
     } else {
+      this.pubDate = new Date();
       this.apiService.createdBoard(
         this.boardForm.value.title,
-        this.boardForm.value.description,).subscribe(
+        this.boardForm.value.description,
+        this.pubDate).subscribe(
         (result) => {
           this.boardCreated.emit(result)
         }

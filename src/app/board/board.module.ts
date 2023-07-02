@@ -6,6 +6,12 @@ import { BoardDetailComponent } from './board-detail/board-detail.component';
 import { BoardFormComponent } from './board-form/board-form.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {CdkTableModule} from "@angular/cdk/table";
+import {MatInputModule} from "@angular/material/input";
+import { BoardCommentFormComponent } from './board-comment-form/board-comment-form.component';
 
 
 
@@ -14,16 +20,23 @@ import {ReactiveFormsModule} from "@angular/forms";
         BoardComponent,
         BoardListComponent,
         BoardDetailComponent,
-        BoardFormComponent
+        BoardFormComponent,
+        BoardCommentFormComponent,
     ],
     exports: [
-        BoardComponent
+        BoardComponent,
+        MatIconModule,
     ],
   imports: [
     CommonModule,
     RouterOutlet,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatTableModule,
+    CdkTableModule,
+    MatInputModule,
   ]
 })
 export class BoardModule { }

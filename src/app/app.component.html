@@ -42,9 +42,9 @@
             </a>
           </li>
           <!--          RouterLink added -->
-          <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/board">BOARD</a></li>
-          <li *ngIf="!loggedIn()" class="nav-item"><a class="nav-link" routerLink="/auth">LOGIN</a></li>
-          <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" (click)="logout()">LOGOUT</a></li>
+          <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/board">Board</a></li>
+          <li *ngIf="!loggedIn()" class="nav-item"><a class="nav-link" routerLink="/auth">Login</a></li>
+          <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>
           <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/user">
             <svg class="bi" width="24" height="24">
               <use xlink:href="#person"/>

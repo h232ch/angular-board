@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private httpClient:HttpClient,
               private cookieService:CookieService) { }
 
-  pageIndex = 1;
+  pageIndex = 0;
 
   baseUrl = 'http://localhost:8000/'
   baseMovieUrl = `${this.baseUrl}api/movies/`
@@ -32,7 +32,7 @@ export class ApiService {
     });
   }
 
-  getBoards(page=1, search?: ɵValue<FormControl<null>> | undefined) {
+  getBoards(page=1, search?: ɵValue<FormControl<null>> | undefined| string) {
     if (search) {
       return this.httpClient.get<Boards>(`${this.movieListBaseUrl}?page=${page}&search=${search}`, {headers: this.getAuthHeaders()});
     } else {
@@ -40,13 +40,6 @@ export class ApiService {
     }
   }
 
-  // getBoards(search: ɵValue<FormControl<null>> | undefined) {
-  //   if (search) {
-  //     return this.httpClient.get<Boards>(`${this.movieListBaseUrl}?search=${search}`,{headers: this.getAuthHeaders()});
-  //   } else {
-  //     return this.httpClient.get<Boards>(`${this.movieListBaseUrl}`, {headers: this.getAuthHeaders()});
-  //   }
-  // }
 
   getBoard(id:number) {
     const url = `${this.baseMovieUrl}${id}`

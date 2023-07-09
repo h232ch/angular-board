@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'user', component: UserComponent},
   {path: 'search', component: BoardComponent},
   {path: 'board', component: BoardComponent},
+  {path: 'board/index', component: BoardComponent},
   {path: 'board/edit/:id', component: BoardFormComponent},
   {path: 'board/write', component: BoardFormComponent},
   {path: 'board/:id', component: BoardDetailComponent},

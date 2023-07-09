@@ -41,6 +41,7 @@
       <mat-paginator [length]=length
                      [pageSize]=10
                      [pageIndex]=pageIndex
+                     [showFirstLastButtons]="true"
                      (page)="changePage($event)"
                      aria-label="Select page">
       </mat-paginator>

@@ -1,6 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
+import {ApiService} from "./api.service";
 
 
 @Component({
@@ -16,9 +17,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
   }
-
 
   loggedIn() {
     return this.cookieService.get('token')

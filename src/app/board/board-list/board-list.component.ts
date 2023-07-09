@@ -77,32 +77,32 @@ export class BoardListComponent implements OnInit {
     window.location.reload();
   }
 
+  // changePage(event: PageEvent) {
+  //   // if (event == true) {
+  //   //   this.page++;
+  //   //   this.apiService.getBoards(this.page, this.searchData).subscribe(
+  //   //     (result: Boards) => {
+  //   //       this.dataSource = new MatTableDataSource(result.results);});
+  //   // } else {
+  //   //   this.page--;
+  //   //   this.apiService.getBoards(this.page, this.searchData).subscribe(
+  //   //     (result: Boards) => {
+  //   //       this.dataSource = new MatTableDataSource(result.results);});
+  //   // }
+  //   // this.router.navigate(["/board"],
+  //   //   {queryParams: {search: this.searchData, page: this.page}});
+  //
+  //
+  // }
+
   changePage(event: PageEvent) {
-    // if (event == true) {
-    //   this.page++;
-    //   this.apiService.getBoards(this.page, this.searchData).subscribe(
-    //     (result: Boards) => {
-    //       this.dataSource = new MatTableDataSource(result.results);});
-    // } else {
-    //   this.page--;
-    //   this.apiService.getBoards(this.page, this.searchData).subscribe(
-    //     (result: Boards) => {
-    //       this.dataSource = new MatTableDataSource(result.results);});
-    // }
-    // this.router.navigate(["/board"],
-    //   {queryParams: {search: this.searchData, page: this.page}});
-
-
-    this.apiService.getBoardsPage(event.pageIndex + 1).subscribe(
+    // console.log(event)
+    this.apiService.getBoardsPage(event.pageIndex+1).subscribe(
       (result: Boards) => {
-        this.boards = result;
-        this.dataSource = new MatTableDataSource(this.boards.results);
-
-        this.pageSize = this.boards.results.length;
-        this.length = this.boards.count;
+        this.dataSource = new MatTableDataSource(result.results);;
+        console.log(result);
       }
     )
-
   }
 
   searchBoards(event: MatTableDataSource<Boards>) {
@@ -110,6 +110,7 @@ export class BoardListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.boards.results);
     this.pageSize = this.boards.results.length;
     this.length = this.boards.count;
+    this.paginator.pageIndex = 0;
     console.log(this.boards)
   }
 

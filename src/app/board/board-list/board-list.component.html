@@ -39,7 +39,8 @@
   <div class="row">
     <div class="mt-3">
       <mat-paginator [length]=length
-                     [pageSize]=pageSize
+                     [pageSize]=10
+                     [pageIndex]=pageIndex
                      (page)="changePage($event)"
                      aria-label="Select page">
       </mat-paginator>

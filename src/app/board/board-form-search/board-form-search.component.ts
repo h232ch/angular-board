@@ -26,7 +26,7 @@ export class BoardFormSearchComponent {
 
   saveForm() {
     if (this.searchForm.value) {
-      this.apiService.getBoards(this.searchForm.value.search).subscribe(
+      this.apiService.getBoards(1, this.searchForm.value.search).subscribe(
         (results: Boards) => {
           this.dataSource.emit(results)
           this.searchData.emit(this.searchForm.value.search)

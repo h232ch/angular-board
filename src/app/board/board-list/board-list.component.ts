@@ -17,8 +17,9 @@ import {ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router}
 export class BoardListComponent implements OnInit {
 
   constructor(private apiService: ApiService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              // private route: ActivatedRoute,
+              // private router: Router
+  ) {
   }
 
   // paginator pageIndex 값을 조작하기 위해 @ViewChild를 사용해야 함
@@ -37,6 +38,7 @@ export class BoardListComponent implements OnInit {
 
   pageSize!:number;
   length!:number;
+  pageIndex!:number;
 
   ngOnInit(): void {
 
@@ -51,15 +53,16 @@ export class BoardListComponent implements OnInit {
 
     // this.apiService.getBoards(this.page, this.searchData).subscribe(
 
-    this.apiService.getBoards().subscribe(
+    this.pageIndex = this.apiService.pageIndexGet()
+    this.apiService.getBoards(this.pageIndex + 1).subscribe(
       (result: Boards) => {
         this.boards = result;
         this.dataSource = new MatTableDataSource(this.boards.results);
-
         this.pageSize = this.boards.results.length;
         this.length = this.boards.count;
 
-        console.log(this.boards)
+        console.log(this.pageIndex)
+        console.log(result)
       },
       error => {
         console.log(error)
@@ -99,10 +102,11 @@ export class BoardListComponent implements OnInit {
     // console.log(event)
     this.apiService.getBoardsPage(event.pageIndex+1).subscribe(
       (result: Boards) => {
-        this.dataSource = new MatTableDataSource(result.results);;
-        console.log(result);
+        this.dataSource = new MatTableDataSource(result.results);
+        // console.log(result);
       }
     )
+    this.apiService.pageIndexSet(event.pageIndex);
   }
 
   searchBoards(event: MatTableDataSource<Boards>) {
@@ -111,7 +115,7 @@ export class BoardListComponent implements OnInit {
     this.pageSize = this.boards.results.length;
     this.length = this.boards.count;
     this.paginator.pageIndex = 0;
-    console.log(this.boards)
+    this.apiService.pageIndexSet(0)
   }
 
   searchDataUpdate(event: string) {

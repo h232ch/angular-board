@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private httpClient:HttpClient,
               private cookieService:CookieService) { }
 
-  boards?: Board[]
+  pageIndex = 1;
 
   baseUrl = 'http://localhost:8000/'
   baseMovieUrl = `${this.baseUrl}api/movies/`
@@ -32,11 +32,11 @@ export class ApiService {
     });
   }
 
-  getBoards(search?: ɵValue<FormControl<null>> | undefined) {
+  getBoards(page=1, search?: ɵValue<FormControl<null>> | undefined) {
     if (search) {
-      return this.httpClient.get<Boards>(`${this.movieListBaseUrl}?search=${search}`, {headers: this.getAuthHeaders()});
+      return this.httpClient.get<Boards>(`${this.movieListBaseUrl}?page=${page}&search=${search}`, {headers: this.getAuthHeaders()});
     } else {
-      return this.httpClient.get<Boards>(`${this.movieListBaseUrl}`,{headers: this.getAuthHeaders()});
+      return this.httpClient.get<Boards>(`${this.movieListBaseUrl}?page=${page}`,{headers: this.getAuthHeaders()});
     }
   }
 
@@ -100,5 +100,13 @@ export class ApiService {
   registerUser(authData: any) {
     const body = JSON.stringify({username: authData.username, password: authData.password});
     return this.httpClient.post(`${this.baseUrl}api/users/`, body, {headers: this.getAuthHeaders()})
+  }
+
+  pageIndexSet(page: number) {
+    this.pageIndex = page;
+  }
+
+  pageIndexGet() {
+    return this.pageIndex;
   }
 }

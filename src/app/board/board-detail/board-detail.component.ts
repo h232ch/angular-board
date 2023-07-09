@@ -1,11 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from "../../api.service";
 import {Board} from "../../models/Board";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Navigation, Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {Comment} from "../../models/Comment"
-
-
 
 
 @Component({
@@ -14,6 +12,7 @@ import {Comment} from "../../models/Comment"
   styleUrls: ['./board-detail.component.css']
 })
 export class BoardDetailComponent implements OnInit {
+
 
   board!: Board;
   editSw: boolean = false;
@@ -30,6 +29,12 @@ export class BoardDetailComponent implements OnInit {
         this.board = board;
       }
     )
+    this.route.params.subscribe(
+      params => (
+        console.log(params)
+      )
+    )
+
   }
 
   constructor(private apiService: ApiService,
@@ -38,7 +43,7 @@ export class BoardDetailComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back()
+    this.location.back();
   }
 
   editSwitch(val: boolean) {

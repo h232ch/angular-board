@@ -9,10 +9,14 @@ import {Board} from "./models/Board";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ApiService} from "./api.service";
 import {Location} from "@angular/common";
+import {AppComponent} from "./app.component";
+import {UserComponent} from "./user/user.component";
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'user', component: UserComponent},
+  {path: 'search', component: BoardComponent},
   {path: 'board', component: BoardComponent},
   {path: 'board/edit/:id', component: BoardFormComponent},
   {path: 'board/write', component: BoardFormComponent},
@@ -20,21 +24,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    onSameUrlNavigation: 'reload'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
 
-  board?: Board
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.apiService.getBoard(id)
-      .subscribe(board => this.board = board)
-  }
-
-  constructor(private apiService: ApiService,
-              private route: ActivatedRoute,
-              private location: Location) {
+  constructor() {
   }
 
 

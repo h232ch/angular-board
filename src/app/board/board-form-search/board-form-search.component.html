@@ -1,0 +1,11 @@
+
+<form [formGroup]="searchForm" (ngSubmit)="saveForm()" class="row justify-content-end text-end">
+  <div class="col-md-3 offset-md-8">
+    <input class="form-control form-control-sm my-1" type="text" placeholder="Search"
+           aria-label=".form-control-sm example" formControlName="search">
+  </div>
+  <div class="col-md-1">
+    <button type="submit" class="btn btn-dark btn-sm my-1">Search</button>
+  </div>
+</form>
+

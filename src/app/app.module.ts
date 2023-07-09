@@ -9,6 +9,8 @@ import {AuthModule} from "./auth/auth.module";
 
 // HttpClient
 import {HttpClientModule} from "@angular/common/http";
+import {MainModule} from "./main/main.module";
+import { UserComponent } from './user/user.component';
 
 
 // Routing setup
@@ -16,14 +18,16 @@ import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
+    UserComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BoardModule,
-    AuthModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BoardModule,
+        AuthModule,
+        HttpClientModule,
+        MainModule,
+    ],
   exports: [
   ],
   providers: [],

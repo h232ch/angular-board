@@ -18,16 +18,16 @@
   </div>
 </div>
 
-<div *ngIf="board && !editSw && !cmtSw" class="container">
+<div *ngIf="board && !editSw && !cmtSw" class="container mx-auto">
   <div class="row">
     <div *ngIf="board.comments.length">
-      <div class="border-bottom col-12 mb-2">
+      <div class="col-12 mb-2">
         <h2> Comments </h2>
       </div>
-      <div *ngFor="let comment of board.comments">
-        <div class="mb-4">
+      <div *ngFor="let comment of board.comments" class="border-top mt-2">
+        <div class="mt-2 mb-4">
           <a class="name_and_date">
-            {{ comment.user }} {{ board.pub_date | date: 'yy-MM-dd hh:mm:ss' }}
+            {{ comment.user }} {{ comment.pub_date | date: 'yy-MM-dd HH:mm:ss' }}
           </a>
         </div>
         <div class="col-md-12">
@@ -37,8 +37,6 @@
           <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
                   (click)="cmtSwitch(true); commentSet(comment)">Edit</button>
           <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1" (click)="commentDelete(comment)">Delete</button>
-        </div>
-        <div class="col-md-12 border-bottom mb-2 mt-4">
         </div>
       </div>
     </div>

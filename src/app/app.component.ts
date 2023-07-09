@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,7 +11,21 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'Angular publish test page';
 
-  ngOnInit(): void {
+  constructor(private cookieService: CookieService,
+              private router: Router) {
   }
 
+  ngOnInit(): void {
+
+  }
+
+
+  loggedIn() {
+    return this.cookieService.get('token')
+  }
+
+  logout() {
+    this.cookieService.delete('token');
+    this.router.navigate(['/'])
+  }
 }

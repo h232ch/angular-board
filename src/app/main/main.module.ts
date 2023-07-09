@@ -4,9 +4,12 @@ import { MainComponent } from './main.component';
 
 
 @NgModule({
-  declarations: [
-    MainComponent
-  ],
+    declarations: [
+        MainComponent
+    ],
+    exports: [
+        MainComponent
+    ],
     imports: [
         CommonModule,
     ]

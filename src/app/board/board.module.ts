@@ -25,10 +25,11 @@ import { BoardFormSearchComponent } from './board-form-search/board-form-search.
         BoardCommentFormComponent,
         BoardFormSearchComponent,
     ],
-    exports: [
-        BoardComponent,
-        MatIconModule,
-    ],
+  exports: [
+    BoardComponent,
+    MatIconModule,
+    BoardFormSearchComponent,
+  ],
     imports: [
         CommonModule,
         RouterOutlet,

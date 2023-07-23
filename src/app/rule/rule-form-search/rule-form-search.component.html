@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row my-5">
+    <form [formGroup]="searchForm" (ngSubmit)="saveForm()">
+      <div class="form-group row justify-content-end">
+        <div class="col-sm-3">
+          <input type="souce" class="form-control form-control-sm my-1"
+                 id="source" placeholder="Source" formControlName="src">
+        </div>
+        <div class="col-sm-3">
+          <input type="destination" class="form-control form-control-sm my-1"
+                 id="destination" placeholder="Destination" formControlName="dst">
+        </div>
+        <div class="col-sm-3">
+          <input type="port" class="form-control form-control-sm my-1"
+                 id="port" placeholder="Port" formControlName="port">
+        </div>
+        <button type="submit"
+                class="btn btn-dark btn-sm col-sm-2 my-1">Submit!</button>
+      </div>
+    </form>
+  </div>
+</div>

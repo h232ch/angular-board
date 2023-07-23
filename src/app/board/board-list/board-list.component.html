@@ -6,20 +6,20 @@
     <mat-table [dataSource]="dataSource">
       <!-- No Column -->
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> no</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> No</mat-header-cell>
         <mat-cell *matCellDef="let consumption"> {{consumption.id}} </mat-cell>
       </ng-container>
 
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef> title</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
         <mat-cell class="cur" *matCellDef="let consumption"
                   routerLink="/board/{{ consumption.id }}"> {{consumption.title}} </mat-cell>
       </ng-container>
 
       <!-- Date Column -->
       <ng-container matColumnDef="user">
-        <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> User</mat-header-cell>
         <mat-cell *matCellDef="let consumption"> {{consumption.user }} </mat-cell>
       </ng-container>
 

@@ -43,6 +43,7 @@
           </li>
           <!--          RouterLink added -->
           <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/board">Board</a></li>
+          <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/rule">Rule</a></li>
           <li *ngIf="!loggedIn()" class="nav-item"><a class="nav-link" routerLink="/auth">Login</a></li>
           <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>
           <li *ngIf="loggedIn()" class="nav-item"><a class="nav-link" routerLink="/user">

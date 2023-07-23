@@ -4,7 +4,7 @@ import {Boards} from "../../models/Boards";
 import {ApiService} from "../../api.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, take} from "rxjs";
 import {ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
 
 
@@ -38,14 +38,11 @@ export class BoardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageIndex = this.apiService.pageIndexGet()
-    this.apiService.getBoards(this.pageIndex + 1, this.searchData).subscribe(
+    this.apiService.getBoards(this.pageIndex + 1, this.searchData).pipe(take(1)).subscribe(
       (result: Boards) => {
         this.boards = result;
         this.dataSource = new MatTableDataSource(this.boards.results);
         this.length = this.boards.count;
-      },
-      error => {
-        console.log(error)
       }
     );
     this.writeSw = false;

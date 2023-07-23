@@ -11,6 +11,8 @@ import {AuthModule} from "./auth/auth.module";
 import {HttpClientModule} from "@angular/common/http";
 import {MainModule} from "./main/main.module";
 import { UserComponent } from './user/user.component';
+import { RuleComponent } from './rule/rule.component';
+import {RuleModule} from "./rule/rule.module";
 
 
 // Routing setup
@@ -19,15 +21,17 @@ import { UserComponent } from './user/user.component';
   declarations: [
     AppComponent,
     UserComponent,
+    RuleComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BoardModule,
-        AuthModule,
-        HttpClientModule,
-        MainModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BoardModule,
+    AuthModule,
+    HttpClientModule,
+    MainModule,
+    RuleModule,
+  ],
   exports: [
   ],
   providers: [],

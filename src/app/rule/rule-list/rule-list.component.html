@@ -1,0 +1,72 @@
+<div class="container mx-auto my-5">
+  <app-rule-form-search (rules)="searchData($event)"></app-rule-form-search>
+  <div class="row m-0">
+    <table class="table table-hover" style="font-size: 14px">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">From</th>
+        <th scope="col">Source</th>
+        <th scope="col">To</th>
+        <th scope="col">Destination</th>
+<!--        <th scope="col">Application</th>-->
+<!--        <th scope="col">category</th>-->
+        <th scope="col">Service</th>
+        <th scope="col">Action</th>
+        <th scope="col">hit-count</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="rules">
+      <tr *ngFor="let item of rules.result">
+<!--        <th style="width: 10%"> {{ item.id }} </th>-->
+        <th> {{ item.id }} </th>
+        <td *ngFor="let item of item.data.from">
+          {{ item.member }}
+        </td>
+        <td *ngFor="let item of item.data.source">
+<!--          {{ item.member }} <br/>-->
+          {{ item.ip }}
+        </td>
+        <td *ngFor="let item of item.data.to">
+          {{ item.member }}
+        </td>
+        <td *ngFor="let item of item.data.destination">
+<!--          {{ item.member }} <br/>-->
+          {{ item.ip }}
+        </td>
+<!--        <td *ngFor="let item of item.data.application">-->
+<!--          {{ item.member }} <br/>-->
+<!--        </td>-->
+<!--        <td *ngFor="let item of item.data.category">-->
+<!--          {{ item.member }}-->
+<!--        </td>-->
+        <td>
+          <ng-container *ngFor="let item of item.data.service">
+            <span *ngFor="let item of item | keyvalue">
+              {{ item.key | uppercase }}
+              <span *ngFor="let item of item.value | keyvalue">
+                <span *ngIf="item.key != 'description'" >
+                  {{ item.value }} <br/>
+                </span>
+              </span>
+            </span>
+          </ng-container>
+        </td>
+        <td>
+          <a class="border-bottom border-2 border-danger" *ngIf="item.data.action == 'allow'">
+            {{ item.data.action }}
+          </a>
+          <a class="border-bottom border-2 border-dark" *ngIf="item.data.action == 'deny'">
+            {{ item.data.action }}
+          </a>
+        </td>
+        <td>
+          {{ item.data["hit-count"] }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

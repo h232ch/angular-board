@@ -11,6 +11,7 @@ import {ApiService} from "./api.service";
 import {Location} from "@angular/common";
 import {AppComponent} from "./app.component";
 import {UserComponent} from "./user/user.component";
+import {RuleComponent} from "./rule/rule.component";
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'board/edit/:id', component: BoardFormComponent},
   {path: 'board/write', component: BoardFormComponent},
   {path: 'board/:id', component: BoardDetailComponent},
+  {path: 'rule', component: RuleComponent},
 ];
 
 @NgModule({

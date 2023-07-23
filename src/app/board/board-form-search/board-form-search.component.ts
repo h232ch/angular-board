@@ -11,14 +11,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./board-form-search.component.css']
 })
 export class BoardFormSearchComponent {
-
   @Output() dataSource = new EventEmitter<any>();
   @Output() searchData = new EventEmitter<any>();
-  search = '';
-  constructor(private apiService:ApiService,
-              private router: Router) {
-  }
 
+  constructor(private apiService:ApiService,) {
+  }
 
   searchForm = new FormGroup({
     search: new FormControl(null),
@@ -35,13 +32,5 @@ export class BoardFormSearchComponent {
     } else {
       console.log('failed')
     }
-
-    // if (this.searchForm.value) {
-    //   this.router.navigate(["/board"],
-    //     {queryParams: {search: this.searchForm.value.search, page: 1}}).then(() =>
-    //   window.location.reload())
-    // } else {
-    //   console.log('failed')
-    // }
   }
 }

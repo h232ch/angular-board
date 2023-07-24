@@ -1,7 +1,10 @@
 <div class="container mx-auto my-5">
-  <app-rule-form-search (rules)="searchData($event)"></app-rule-form-search>
-  <div class="row m-0">
-    <table class="table table-hover" style="font-size: 14px">
+  <app-rule-form-search
+    (rules)="searchData($event)"
+    (errorMessage)="errorMessage($event)"></app-rule-form-search>
+
+  <div class="row m-1 table-responsive">
+    <table class="table table-md table-hover" style="font-size: 14px">
       <thead>
       <tr>
         <th scope="col">ID</th>
@@ -66,6 +69,15 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div class="row my-3 text-center" *ngIf="errorMsg">
+    <h3>Check Data Format</h3>
+  </div>
+  <div class="row my-3 text-center" *ngIf="!emptyMsg">
+    <h3>No result.</h3>
+  </div>
+  <div class="row my-3 text-center" *ngIf="firMsg">
+    <h3>Search Data Format : Network (10.10.10.0/24), IP Address(10.10.10.10), Port (443)</h3>
   </div>
 </div>
 

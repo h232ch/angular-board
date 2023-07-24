@@ -88,7 +88,7 @@ export class ApiService {
 
   loginUser(authData: any) {
     const body = JSON.stringify({username: authData.username, password: authData.password});
-    return this.httpClient.post(`${this.baseUrl}auth/`, body, {headers: this.getAuthHeaders()});
+    return this.httpClient.post(`${this.baseUrl}api/auth/`, body, {headers: this.getAuthHeaders()});
   }
 
   registerUser(authData: any) {
@@ -108,9 +108,9 @@ export class ApiService {
     string, dst?: ɵValue<FormControl<null>> | string, port?: ɵValue<FormControl<null>> |
     undefined | string) {
     if (src || dst || port) {
-      return this.httpClient.get<Rules>(`${this.baseUrl}api/rule?src=${src}&dst=${dst}&port=${port}`);
+      return this.httpClient.get<Rules>(`${this.baseUrl}api/rule?src=${src}&dst=${dst}&port=${port}`, {headers: this.getAuthHeaders()});
     } else {
-      return this.httpClient.get<any>(`${this.baseUrl}api/rule/`);
+      return this.httpClient.get<any>(`${this.baseUrl}api/rule/`, {headers: this.getAuthHeaders()});
     }
   }
 }

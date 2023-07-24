@@ -25,6 +25,7 @@ export class AppComponent implements OnInit{
 
   logout() {
     this.cookieService.delete('token');
+    this.cookieService.delete('username')
     this.router.navigate(['/'])
   }
 }

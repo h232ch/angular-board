@@ -17,10 +17,10 @@ export class AuthComponent implements OnInit{
 
   ngOnInit(): void {
     const token = this.cookieService.get('token');
-    console.log(token)
     if (token) {
       this.router.navigate(['/board']);
     }
+    this.loginFailMsg = false;
   }
 
   authForm = new FormGroup({
@@ -29,17 +29,18 @@ export class AuthComponent implements OnInit{
   })
 
   registerMode:boolean = false;
-  loginFailMsg:string = '';
+  loginFailMsg!:boolean;
 
   saveForm() {
     if (!this.registerMode) {
       this.apiService.loginUser(this.authForm.value).subscribe(
         (result: any) => {
           this.cookieService.set('token', result.token);
-          this.router.navigate(['/board']);
+          this.cookieService.set('username', result.username);
+          this.router.navigate(['/rule']);
         }, error => {
           if (error.status == 400) {
-            this.loginFailMsg = "Username or password is not correct, Check it up again."
+            this.loginFailMsg = true;
           }
         }
       )

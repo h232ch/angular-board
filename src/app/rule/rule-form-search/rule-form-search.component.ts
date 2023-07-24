@@ -10,6 +10,8 @@ import {Rules} from "../../models/Rules";
 })
 export class RuleFormSearchComponent {
   @Output() rules = new EventEmitter<Rules>();
+  @Output() errorMessage = new EventEmitter<string>();
+
   constructor(private apiService:ApiService) {
   }
 
@@ -33,6 +35,9 @@ export class RuleFormSearchComponent {
       subscribe(
         (result: Rules) => {
           this.rules.emit(result)
+        },
+        (error) => {
+          this.errorMessage.emit(error.message);
         }
       )
     }

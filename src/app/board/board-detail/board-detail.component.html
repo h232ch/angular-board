@@ -1,6 +1,6 @@
 <div *ngIf="board && !editSw && !cmtSw" class="container">
   <div class="row">
-    <div class="border-bottom col-12 mb-2 mt-5">
+    <div class="border-bottom col-12 mx-auto m-1 mb-2 mt-5">
       <h1>{{ board.title }}</h1>
     </div>
     <div class="col-12 mb-3">
@@ -10,11 +10,15 @@
       <a>{{ board.description }}</a>
     </div>
   </div>
-  <div class="row justify-content-end mt-5">
+  <div class="row justify-content-end text-center mx-auto m-1 mt-5">
     <button type="button" class="btn btn-dark btn-sm my-2 col-md-1" (click)="goBack()">Back</button>
     <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1" (click)="cmtSwitch(true)">Comment</button>
-    <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1" (click)="editSwitch(true)">Edit</button>
-    <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1" (click)="boardDeleted(board)">Delete</button>
+    <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
+            *ngIf="board.user == this.username || this.username == 'admin'"
+            (click)="editSwitch(true)">Edit</button>
+    <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
+            *ngIf="board.user == this.username || this.username == 'admin'"
+            (click)="boardDeleted(board)">Delete</button>
   </div>
 </div>
 
@@ -35,8 +39,12 @@
         </div>
         <div class="row justify-content-end">
           <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
+                  *ngIf="comment.user == this.username || this.username == 'admin'"
                   (click)="cmtSwitch(true); commentSet(comment)">Edit</button>
-          <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1" (click)="commentDelete(comment)">Delete</button>
+          <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
+                  *ngIf="comment.user == this.username || this.username == 'admin'"
+                  (click)="commentDelete(comment)">Delete</button>
+
         </div>
       </div>
     </div>

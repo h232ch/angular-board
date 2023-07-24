@@ -4,6 +4,7 @@ import {Board} from "../../models/Board";
 import {ActivatedRoute, Navigation, Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {Comment} from "../../models/Comment"
+import {CookieService} from "ngx-cookie-service";
 
 
 @Component({
@@ -13,8 +14,14 @@ import {Comment} from "../../models/Comment"
 })
 export class BoardDetailComponent implements OnInit {
 
+  constructor(private apiService: ApiService,
+              private route: ActivatedRoute,
+              private location: Location,
+              private cookieService:CookieService) {
+  }
 
   board!: Board;
+  username!:string;
   editSw: boolean = false;
   cmtSw: boolean = false;
   comment: {} ={
@@ -34,13 +41,10 @@ export class BoardDetailComponent implements OnInit {
         console.log(params)
       )
     )
+    this.username = this.cookieService.get('username');
 
   }
 
-  constructor(private apiService: ApiService,
-              private route: ActivatedRoute,
-              private location: Location) {
-  }
 
   goBack() {
     this.location.back();

@@ -15,6 +15,9 @@
           <button *ngIf="!registerMode" type="submit" class="btn btn-dark btn-sm my-2 col-md-2">Login</button>
           <button *ngIf="registerMode" type="submit" class="btn btn-dark btn-sm my-2 col-md-2">Register</button>
         </div>
+        <div class="mb-3" *ngIf="loginFailMsg">
+          ID or Password is incorrect Check it again.
+        </div>
         <div class="row justify-content-end notice">
           <span *ngIf="!registerMode" (click)="registerMode = true">Don't have an account? Register here.</span>
           <span *ngIf="registerMode" (click)="registerMode = false">Already have an account? Go to login.</span>

@@ -13,19 +13,27 @@ export class AppComponent implements OnInit{
   title = 'Angular publish test page';
 
   constructor(private cookieService: CookieService,
-              private router: Router) {
+              private router: Router,
+              private apiService:ApiService, ) {
   }
 
   ngOnInit(): void {
   }
 
   loggedIn() {
-    return this.cookieService.get('token')
+    return this.apiService.getToken()
   }
 
+  // Token Authentication
+  // logout() {
+  //   this.cookieService.delete('token');
+  //   this.cookieService.delete('username')
+  //   this.router.navigate(['/'])
+  // }
+
+  // Jwt Authentication
   logout() {
-    this.cookieService.delete('token');
-    this.cookieService.delete('username')
+    this.apiService.removeTokens();
     this.router.navigate(['/'])
   }
 }

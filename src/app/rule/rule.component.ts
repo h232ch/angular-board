@@ -19,7 +19,7 @@ export class RuleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.cookieService.get('username')) {
+    if (!this.apiService.getToken()) {
       this.router.navigate(['/']);
     }
     this.apiService.getRules().subscribe(

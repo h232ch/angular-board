@@ -1,6 +1,6 @@
 <div *ngIf="board && !editSw && !cmtSw" class="container">
-  <div class="row">
-    <div class="border-bottom col-12 mx-auto m-1 mb-2 mt-5">
+  <div class="row m-1">
+    <div class="border-bottom col-12 mx-auto mb-2 mt-5">
       <h1>{{ board.title }}</h1>
     </div>
     <div class="col-12 mb-3">
@@ -22,8 +22,8 @@
   </div>
 </div>
 
-<div *ngIf="board && !editSw && !cmtSw" class="container mx-auto">
-  <div class="row">
+<div *ngIf="board && !editSw && !cmtSw" class="container">
+  <div class="row m-1">
     <div *ngIf="board.comments.length">
       <div class="col-12 mb-2">
         <h2> Comments </h2>
@@ -44,7 +44,6 @@
           <button type="button" class="btn btn-dark btn-sm my-2 ms-2 col-md-1"
                   *ngIf="comment.user == this.username || this.username == 'admin'"
                   (click)="commentDelete(comment)">Delete</button>
-
         </div>
       </div>
     </div>

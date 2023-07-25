@@ -12,6 +12,8 @@ import {Location} from "@angular/common";
 import {AppComponent} from "./app.component";
 import {UserComponent} from "./user/user.component";
 import {RuleComponent} from "./rule/rule.component";
+import {LoginComponent} from "./login/login.component";
+import {SecureComponent} from "./secure/secure.component";
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -24,6 +26,11 @@ const routes: Routes = [
   {path: 'board/write', component: BoardFormComponent},
   {path: 'board/:id', component: BoardDetailComponent},
   {path: 'rule', component: RuleComponent},
+
+  // Jwt Test Routing
+  { path: 'login', component: LoginComponent },
+  { path: 'secure', component: SecureComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -13,6 +13,9 @@ import {MainModule} from "./main/main.module";
 import { UserComponent } from './user/user.component';
 import { RuleComponent } from './rule/rule.component';
 import {RuleModule} from "./rule/rule.module";
+import { SecureComponent } from './secure/secure.component';
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from "@angular/forms";
 
 
 // Routing setup
@@ -22,16 +25,19 @@ import {RuleModule} from "./rule/rule.module";
     AppComponent,
     UserComponent,
     RuleComponent,
+    SecureComponent,
+    LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BoardModule,
-    AuthModule,
-    HttpClientModule,
-    MainModule,
-    RuleModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BoardModule,
+        AuthModule,
+        HttpClientModule,
+        MainModule,
+        RuleModule,
+        FormsModule,
+    ],
   exports: [
   ],
   providers: [],

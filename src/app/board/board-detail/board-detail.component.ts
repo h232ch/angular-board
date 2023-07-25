@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ApiService} from "../../api.service";
 import {Board} from "../../models/Board";
 import {ActivatedRoute, Navigation, Router} from "@angular/router";
@@ -17,14 +17,14 @@ export class BoardDetailComponent implements OnInit {
   constructor(private apiService: ApiService,
               private route: ActivatedRoute,
               private location: Location,
-              private cookieService:CookieService) {
+              private cookieService: CookieService) {
   }
 
   board!: Board;
-  username!:string;
+  username!: string | null;
   editSw: boolean = false;
   cmtSw: boolean = false;
-  comment: {} ={
+  comment: {} = {
     comment: '',
     comment_id: '',
   }
@@ -33,16 +33,20 @@ export class BoardDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'))
     this.apiService.getBoard(id)
       .subscribe(board => {
-        this.board = board;
-      }
-    )
-    this.route.params.subscribe(
-      params => (
-        console.log(params)
+          this.board = board;
+        }
       )
-    )
-    this.username = this.cookieService.get('username');
+    // this.route.params.subscribe(
+    //   params => (
+    //     console.log(params)
+    //   )
+    // )
 
+    // Token Authorization
+    // this.username = this.cookieService.get('username');
+
+    // jwt Authorization
+    this.username = this.apiService.getUser()
   }
 
 
@@ -72,15 +76,15 @@ export class BoardDetailComponent implements OnInit {
     this.cmtSwitch(false);
   }
 
-  commentSet(comment:{}) {
+  commentSet(comment: {}) {
     this.comment = comment;
   }
 
   cmtSwitch(event: boolean) {
     this.cmtSw = event
     this.comment = {
-      comment : '',
-      comment_id : '',
+      comment: '',
+      comment_id: '',
     }
   }
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Board} from "../models/Board";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-board',
@@ -10,11 +10,12 @@ import {Router} from "@angular/router";
 })
 export class BoardComponent implements OnInit {
   constructor(private cookieService: CookieService,
-              private router: Router) {
+              private router: Router,
+              private apiService:ApiService) {
   }
 
   ngOnInit(): void {
-    if (!this.cookieService.get('username')) {
+    if (!this.apiService.getToken()) {
       this.router.navigate(['/']);
     }
   }

@@ -8,6 +8,7 @@ import {FormControl, ɵValue} from "@angular/forms";
 import {Rules} from "./models/Rules";
 import {AuthService} from "./auth.service";
 import {catchError} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ import {catchError} from "rxjs/operators";
 export class ApiService {
 
   constructor(private httpClient: HttpClient,
-              private cookieService: CookieService) {
+              private cookieService: CookieService,
+              private router: Router) {
   }
 
   private pageIndex = 0;
@@ -88,23 +90,25 @@ export class ApiService {
           this.removeTokens();
           // Redirect to login page or show an error message
           return throwError('Authorization failed. Please log in again.');
+          this.router.navigate(['/']);
         })
       ).subscribe(
         (response) => {
           if (response.access) {
             this.saveToken(response.access, refreshToken);
             // Retry fetching the secret after token refresh
-            // todo Refresh page
           } else {
             this.removeTokens();
             // Redirect to login page or show an error message
             throwError('Authorization failed. Please log in again.');
+            this.router.navigate(['/']);
           }
         }
       );
     } else {
       // Redirect to login page or show an error message
       return throwError('Authorization failed. Please log in again.');
+      this.router.navigate(['/']);
     }
   }
 

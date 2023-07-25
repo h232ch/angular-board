@@ -84,7 +84,7 @@ export class ApiService {
     const refreshToken = this.getRefreshToken();
 
     if (refreshToken) {
-      return this.refreshToken(refreshToken).pipe(
+      this.refreshToken(refreshToken).pipe(
         catchError((error) => {
           console.error('Failed to refresh token:', error);
           this.removeTokens();
@@ -161,10 +161,12 @@ export class ApiService {
 
   createdBoard(title: string, description: string, pub_date: Date): Observable<any> {
     const body = JSON.stringify({title: title, description: description, pub_date: pub_date});
-    return this.httpClient.post(`${this.baseBoardUrl}`, body, {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.post(`${this.baseBoardUrl}`, body, {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.post(`${this.baseBoardUrl}`, body, {headers: this.getAuthHeaders()})
         }
         return throwError(error);
       })
@@ -173,11 +175,14 @@ export class ApiService {
 
   updatedBoard(id: number, title: string, description: string): Observable<any> {
     const body = JSON.stringify({title: title, description: description});
-    return this.httpClient.put(`${this.baseBoardUrl}${id}/`,
-      body, {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.put(`${this.baseBoardUrl}${id}/`,
+      body, {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.put(`${this.baseBoardUrl}${id}/`,
+            body, {headers: this.getAuthHeaders()})
         }
         return throwError(error);
       })
@@ -185,11 +190,14 @@ export class ApiService {
   }
 
   deletedBoard(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseBoardUrl}${id}/`,
-      {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.delete(`${this.baseBoardUrl}${id}/`,
+      {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.delete(`${this.baseBoardUrl}${id}/`,
+            {headers: this.getAuthHeaders()});
         }
         return throwError(error);
       })
@@ -198,11 +206,14 @@ export class ApiService {
 
   createdComment(id: number, comment: string, pub_date: Date): Observable<any> {
     const body = JSON.stringify({movie: id, comment: comment, pub_date: pub_date});
-    return this.httpClient.post(`${this.baseUrl}api/comments/`, body,
-      {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.post(`${this.baseUrl}api/comments/`, body,
+      {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.post(`${this.baseUrl}api/comments/`, body,
+            {headers: this.getAuthHeaders()})
         }
         return throwError(error);
       })
@@ -211,11 +222,14 @@ export class ApiService {
 
   updatedComment(id: number, comment: string): Observable<any> {
     const body = JSON.stringify({comment: comment});
-    return this.httpClient.put(`${this.baseUrl}api/comments/${id}/`,
-      body, {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.put(`${this.baseUrl}api/comments/${id}/`,
+      body, {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.put(`${this.baseUrl}api/comments/${id}/`,
+            body, {headers: this.getAuthHeaders()});
         }
         return throwError(error);
       })
@@ -223,11 +237,14 @@ export class ApiService {
   }
 
   deletedComment(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}api/comments/${id}/`,
-      {headers: this.getAuthHeaders()}).pipe(
+    const request = this.httpClient.delete(`${this.baseUrl}api/comments/${id}/`,
+      {headers: this.getAuthHeaders()})
+    return request.pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
+          this.httpClient.delete(`${this.baseUrl}api/comments/${id}/`,
+            {headers: this.getAuthHeaders()});
         }
         return throwError(error);
       })
@@ -243,14 +260,7 @@ export class ApiService {
   registerUser(authData: any): Observable<any> {
     const body = JSON.stringify({username: authData.username, password: authData.password});
     return this.httpClient.post(`${this.baseUrl}api/users/`,
-      body, {headers: this.getAuthHeaders()}).pipe(
-      catchError((error) => {
-        if (error.status === 401) {
-          return this.handleUnauthorizedError();
-        }
-        return throwError(error);
-      })
-    );
+      body, {headers: this.getAuthHeaders()});
   }
 
   pageIndexSet(page: number) {
@@ -265,21 +275,27 @@ export class ApiService {
     string, dst?: ɵValue<FormControl<null>> | string, port?: ɵValue<FormControl<null>> |
     undefined | string): Observable<any> {
     if (src || dst || port) {
-      return this.httpClient.get<Rules>(`${this.baseUrl}api/rule?src=${src}&dst=${dst}&port=${port}`,
-        {headers: this.getAuthHeaders()}).pipe(
+      const request = this.httpClient.get<Rules>(`${this.baseUrl}api/rule?src=${src}&dst=${dst}&port=${port}`,
+        {headers: this.getAuthHeaders()})
+      return request.pipe(
         catchError((error) => {
           if (error.status === 401) {
-            return this.handleUnauthorizedError();
+            this.handleUnauthorizedError();
+            this.httpClient.get<Rules>(`${this.baseUrl}api/rule?src=${src}&dst=${dst}&port=${port}`,
+              {headers: this.getAuthHeaders()})
           }
           return throwError(error);
         })
       );
     } else {
-      return this.httpClient.get<any>(`${this.baseUrl}api/rule/`,
-        {headers: this.getAuthHeaders()}).pipe(
+      const request = this.httpClient.get<any>(`${this.baseUrl}api/rule/`,
+        {headers: this.getAuthHeaders()})
+      return request.pipe(
         catchError((error) => {
           if (error.status === 401) {
-            return this.handleUnauthorizedError();
+            this.handleUnauthorizedError();
+            this.httpClient.get<any>(`${this.baseUrl}api/rule/`,
+              {headers: this.getAuthHeaders()})
           }
           return throwError(error);
         })
@@ -294,7 +310,7 @@ export class ApiService {
       }).pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return this.handleUnauthorizedError();
+          this.handleUnauthorizedError();
         }
         return throwError(error);
       }))

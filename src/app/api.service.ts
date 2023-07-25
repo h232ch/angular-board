@@ -26,6 +26,7 @@ export class ApiService {
   private apiUrl = 'http://localhost:8000/api/token/';
   private refreshTokenUrl = 'http://localhost:8000/api/token/refresh/';
 
+  // Token Authorization
   // getAuthHeaders(): HttpHeaders {
   //   const token = this.cookieService.get("token")
   //   return new HttpHeaders({
